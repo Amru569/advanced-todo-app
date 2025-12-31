@@ -1,53 +1,48 @@
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 function addTask(){
- let text = taskInput.value.trim();
- if(text==="") return alert("Task cannot be empty");
- let cat = category.value;
+ let text = taskInput.value;
+ let category = document.getElementById("category").value;
  let date = dueDate.value;
 
- tasks.push({text,cat,date,done:false});
- save();
+ if(text==="") return alert("Enter a task!");
+
+ tasks.push({text,category,date,done:false});
+ localStorage.setItem("tasks",JSON.stringify(tasks));
+ taskInput.value="";
+ displayTasks();
 }
 
-function save(){
+function toggle(i){
+ tasks[i].done = !tasks[i].done;
  localStorage.setItem("tasks",JSON.stringify(tasks));
  displayTasks();
 }
 
-function toggle(i){ tasks[i].done=!tasks[i].done; save(); }
-function del(i){ tasks.splice(i,1); save(); }
-
-function edit(i){
- let newTask = prompt("Edit Task",tasks[i].text);
- if(newTask) tasks[i].text=newTask;
- save();
+function del(i){
+ tasks.splice(i,1);
+ localStorage.setItem("tasks",JSON.stringify(tasks));
+ displayTasks();
 }
 
 function displayTasks(){
- let s = search.value.toLowerCase();
- let sf = statusFilter.value;
- let cf = catFilter.value;
- taskList.innerHTML="";
+ let list="";
+ let filter=document.getElementById("filter").value;
 
  tasks.forEach((t,i)=>{
-  if(!t.text.toLowerCase().includes(s)) return;
-  if(sf=="completed" && !t.done) return;
-  if(sf=="pending" && t.done) return;
-  if(cf!="all" && t.cat!=cf) return;
+  if(filter=="completed" && !t.done) return;
+  if(filter=="pending" && t.done) return;
 
-  taskList.innerHTML+=`
+  list+=`
   <li class="${t.done?'completed':''}">
-  ${t.text} - ${t.cat} - ${t.date}
-  <button onclick="toggle(${i})">✔</button>
-  <button onclick="edit(${i})">✏</button>
-  <button onclick="del(${i})">🗑</button>
+   ${t.text} (${t.category}) - ${t.date}
+   <span>
+    <button onclick="toggle(${i})">✔</button>
+    <button onclick="del(${i})">🗑</button>
+   </span>
   </li>`;
  });
-}
-
-function toggleDark(){
- document.body.classList.toggle("dark");
+ taskList.innerHTML=list;
 }
 
 displayTasks();

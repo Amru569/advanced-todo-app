@@ -1,8 +1,79 @@
-body{font-family:Arial;background:#eef;}
-.dark{background:#111;color:white;}
-.container{width:350px;margin:40px auto;background:white;padding:15px;border-radius:10px;}
-.dark .container{background:#222;}
-input,select,button{width:100%;padding:6px;margin:4px;}
-li{list-style:none;padding:6px;border-bottom:1px solid #ccc;}
-.completed{text-decoration:line-through;color:gray;}
-.filters{display:flex;gap:5px;}
+body{
+ margin:0;
+ padding:0;
+ font-family:'Segoe UI',sans-serif;
+ min-height:100vh;
+ background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.7)),
+ url("images.jpg") center/cover fixed no-repeat;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+}
+
+.container{
+ width:380px;
+ backdrop-filter: blur(14px);
+ background:rgba(255,255,255,0.15);
+ padding:25px;
+ border-radius:20px;
+ box-shadow:0 30px 60px rgba(0,0,0,0.5);
+ color:white;
+ animation:pop 1s ease;
+}
+
+@keyframes pop{
+ from{transform:scale(0.8);opacity:0;}
+ to{transform:scale(1);opacity:1;}
+}
+
+h1{text-align:center;}
+
+input,select,button{
+ width:100%;
+ margin:6px 0;
+ padding:10px;
+ border:none;
+ border-radius:12px;
+ outline:none;
+}
+
+button{
+ background:linear-gradient(45deg,#ff6ec4,#7873f5);
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+ transition:0.3s;
+}
+
+button:hover{
+ transform:scale(1.05);
+ box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+
+li{
+ list-style:none;
+ background:rgba(255,255,255,0.25);
+ padding:10px;
+ margin:8px 0;
+ border-radius:10px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ animation:slide 0.4s ease;
+}
+
+@keyframes slide{
+ from{opacity:0;transform:translateX(-20px);}
+ to{opacity:1;transform:translateX(0);}
+}
+
+.completed{
+ text-decoration:line-through;
+ color:#ccc;
+}
+
+li button{
+ width:auto;
+ padding:6px 10px;
+ background:linear-gradient(45deg,#36d1dc,#5b86e5);
+}
