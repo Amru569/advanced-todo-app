@@ -1,35 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <title>NeuroTask AI</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="dashboard">
-  <h1>🧠 NeuroTask <span>AI</span></h1>
-
-  <div class="glass-panel">
-    <input id="taskInput" placeholder="Type your thought...">
-    <select id="category">
-      <option>Deep Work</option>
-      <option>Creative</option>
-      <option>Wellness</option>
-    </select>
-    <input type="date" id="dueDate">
-    <button onclick="addTask()">Create Task</button>
-  </div>
-
-  <div class="filters">
-    <button onclick="setFilter('all')">All</button>
-    <button onclick="setFilter('completed')">Done</button>
-    <button onclick="setFilter('pending')">Focus</button>
-  </div>
-
-  <ul id="taskList"></ul>
+<h1>🧠 NeuroTask <span>AI</span></h1>
+<p>Your productivity control center</p>
+<button onclick="location.href='tasks.html'">Open Task Board</button>
+<button onclick="location.href='insights.html'">View Insights</button>
 </div>
-
-<script src="script.js"></script>
 </body>
 </html>
