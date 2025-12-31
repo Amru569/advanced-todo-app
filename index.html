@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Advanced Todo App</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+<h2>📝 Smart Todo Manager</h2>
+
+<input id="taskInput" placeholder="Enter task">
+<select id="category">
+<option>Work</option><option>Study</option><option>Personal</option>
+</select>
+<input type="date" id="dueDate">
+<button onclick="addTask()">Add Task</button>
+
+<input id="search" placeholder="Search tasks..." onkeyup="displayTasks()">
+
+<div class="filters">
+<select id="statusFilter" onchange="displayTasks()">
+<option value="all">All</option>
+<option value="completed">Completed</option>
+<option value="pending">Pending</option>
+</select>
+
+<select id="catFilter" onchange="displayTasks()">
+<option value="all">All Categories</option>
+<option>Work</option><option>Study</option><option>Personal</option>
+</select>
+
+<button onclick="toggleDark()">🌙</button>
+</div>
+
+<ul id="taskList"></ul>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

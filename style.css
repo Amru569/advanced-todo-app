@@ -1,0 +1,8 @@
+body{font-family:Arial;background:#eef;}
+.dark{background:#111;color:white;}
+.container{width:350px;margin:40px auto;background:white;padding:15px;border-radius:10px;}
+.dark .container{background:#222;}
+input,select,button{width:100%;padding:6px;margin:4px;}
+li{list-style:none;padding:6px;border-bottom:1px solid #ccc;}
+.completed{text-decoration:line-through;color:gray;}
+.filters{display:flex;gap:5px;}
