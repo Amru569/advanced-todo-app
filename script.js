@@ -1,48 +1,59 @@
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let tasks = JSON.parse(localStorage.getItem("neurotasks")) || [];
+let filter="all";
 
 function addTask(){
- let text = taskInput.value;
- let category = document.getElementById("category").value;
- let date = dueDate.value;
+ let text=taskInput.value;
+ let category=category.value;
+ let date=dueDate.value;
 
- if(text==="") return alert("Enter a task!");
+ if(text==="") return alert("Enter your thought");
 
- tasks.push({text,category,date,done:false});
- localStorage.setItem("tasks",JSON.stringify(tasks));
- taskInput.value="";
+ let priority=text.length>15?"High Focus":"Quick Win";
+ tasks.push({text,category,date,priority,done:false});
+ localStorage.setItem("neurotasks",JSON.stringify(tasks));
  displayTasks();
+ taskInput.value="";
 }
 
+function setFilter(f){filter=f;displayTasks();}
+
 function toggle(i){
- tasks[i].done = !tasks[i].done;
- localStorage.setItem("tasks",JSON.stringify(tasks));
+ tasks[i].done=!tasks[i].done;
+ localStorage.setItem("neurotasks",JSON.stringify(tasks));
  displayTasks();
 }
 
 function del(i){
  tasks.splice(i,1);
- localStorage.setItem("tasks",JSON.stringify(tasks));
+ localStorage.setItem("neurotasks",JSON.stringify(tasks));
  displayTasks();
 }
 
 function displayTasks(){
- let list="";
- let filter=document.getElementById("filter").value;
-
+ if(!taskList) return;
+ let html="";
  tasks.forEach((t,i)=>{
   if(filter=="completed" && !t.done) return;
   if(filter=="pending" && t.done) return;
-
-  list+=`
-  <li class="${t.done?'completed':''}">
-   ${t.text} (${t.category}) - ${t.date}
+  html+=`
+   <li class="${t.done?'completed':''}">
+   <b>${t.text}</b><br>
+   <small>${t.category} | ${t.priority}</small>
    <span>
-    <button onclick="toggle(${i})">✔</button>
-    <button onclick="del(${i})">🗑</button>
-   </span>
-  </li>`;
+   <button onclick="toggle(${i})">✔</button>
+   <button onclick="del(${i})">✖</button>
+   </span></li>`;
  });
- taskList.innerHTML=list;
+ taskList.innerHTML=html;
+}
+
+if(document.getElementById("aiBox")){
+ let completed=tasks.filter(t=>t.done).length;
+ let total=tasks.length;
+ let rate= total?Math.round(completed/total*100):0;
+ aiBox.innerHTML=`
+  <h3>Focus Score : ${rate}%</h3>
+  <p>${rate>70?"Excellent discipline":"You need more consistency!"}</p>`;
 }
 
 displayTasks();
